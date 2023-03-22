@@ -22,7 +22,7 @@ export const globalStyles = StyleSheet.create({
         color: '#f4952f',
     },
     touch: {
-        padding: 10
+        padding: 5
     },
     button: {
         marginBottom: 30,
