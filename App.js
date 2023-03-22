@@ -1,20 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import React, { useCallback } from 'react';
+import { View, Text } from 'react-native'
+
+import { useFonts } from "expo-font";
+import * as SplashScreen from 'expo-splash-screen';
+
+import { Provider } from "react-redux";
+import store from './redux/store'
+
+import Navigation from './routes/navigation';
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+
+  let [fontsLoaded] = useFonts({
+    "Kalam-Regular": require("./assets/fonts/Kalam-Regular.ttf"),
+    "Kalam-Light": require("./assets/fonts/Kalam-Light.ttf"),
+    "Kalam-Bold": require("./assets/fonts/Kalam-Bold.ttf"),
+  })
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <Navigation onLayout={onLayoutRootView} />
+    </Provider>
+    // <View>
+    //   <Text>Hola Mundo!!!</Text>
+    // </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
