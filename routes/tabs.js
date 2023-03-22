@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from "react-redux";
-import { getAllRecipes, modalSort } from "../redux/actions";
+import { getAllRecipes, modalSort, modalFilter, modalAbout } from "../redux/actions";
 
 import { View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -55,7 +55,13 @@ const Tabs = () => {
                     )
                 }}
             />
-            <Tab.Screen name="By Diets" component={Empty}
+            <Tab.Screen name="Diets" component={Empty}
+                listeners={() => ({
+                    tabPress: (e) => {
+                        e.preventDefault()
+                        dispatch(modalFilter(true))
+                    },
+                })}
                 options={{
                     tabBarIcon: () => (
                         <Feather name="filter" size={24} color="#f4952f" />
