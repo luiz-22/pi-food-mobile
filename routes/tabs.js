@@ -5,8 +5,12 @@ import { getAllRecipes, modalSort } from "../redux/actions";
 import { View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Home from '../screens/home'
+import { FontAwesome } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
+import Home from '../screens/home'
 
 const Tab = createBottomTabNavigator();
 
@@ -44,16 +48,40 @@ const Tabs = () => {
                         e.preventDefault()
                         dispatch(modalSort(true))
                     },
-                })} />
-            <Tab.Screen name="By Diets" component={Empty} />
+                })}
+                options={{
+                    tabBarIcon: () => (
+                        <FontAwesome name="unsorted" size={24} color="#f4952f" />
+                    )
+                }}
+            />
+            <Tab.Screen name="By Diets" component={Empty}
+                options={{
+                    tabBarIcon: () => (
+                        <Feather name="filter" size={24} color="#f4952f" />
+                    )
+                }}
+            />
             <Tab.Screen name="Show All" component={Empty}
                 listeners={() => ({
                     tabPress: (e) => {
                         e.preventDefault()
                         dispatch(getAllRecipes())
                     },
-                })} />
-            <Tab.Screen name="About" component={Empty} />
+                })}
+                options={{
+                    tabBarIcon: () => (
+                        <AntDesign name="bars" size={24} color="#f4952f" />
+                    )
+                }}
+            />
+            <Tab.Screen name="About" component={Empty}
+                options={{
+                    tabBarIcon: () => (
+                        <Ionicons name="ios-rocket" size={24} color="#f4952f" />
+                    )
+                }}
+            />
         </Tab.Navigator>
     )
 }

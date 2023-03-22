@@ -11,12 +11,29 @@ const Sort = () => {
     return (
         <View>
             <Modal style={globalStyles.container} >
-                <Text>Sort Modal</Text>
                 <TouchableOpacity onPress={() => {
                     dispatch(sortAtoZ())
                     dispatch(modalSort(false))
                 }}>
-                    <Text>Cerrar</Text>
+                    <Text>A - Z</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {
+                    dispatch(sortZtoA())
+                    dispatch(modalSort(false))
+                }}>
+                    <Text>Z - A</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {
+                    dispatch(sortHealtScoreAsc())
+                    dispatch(modalSort(false))
+                }}>
+                    <Text>Health Score: 1 - 100</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {
+                    dispatch(sortHealtScoreDes())
+                    dispatch(modalSort(false))
+                }}>
+                    <Text>Health Score: 100 - 1</Text>
                 </TouchableOpacity>
             </Modal>
         </View>
