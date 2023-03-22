@@ -9,6 +9,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { EvilIcons } from '@expo/vector-icons';
 
 import Home from '../screens/home'
 
@@ -30,18 +31,21 @@ const Tabs = () => {
                 },
                 tabBarInactiveTintColor: '#f4952f',
             }}>
-            <Tab.Screen name="Home" component={Home} options={{
-                tabBarButton: () => null,
-                tabBarVisible: false,
-                title: "Recipe Inn",
-                headerStyle: {
-                    backgroundColor: "#000000",
-                },
-                headerTitleStyle: {
-                    color: "#f4952f",
-                    fontFamily: "Kalam-Regular",
-                },
-            }} />
+            <Tab.Screen name="Home" component={Home}
+                options={{
+                    tabBarButton: () => null,
+                    tabBarVisible: false,
+                    title: "Recipe Inn",
+                    headerStyle: {
+                        backgroundColor: "#000000",
+                    },
+                    headerTitleStyle: {
+                        color: "#f4952f",
+                        fontFamily: "Kalam-Regular",
+                    },
+                    headerRight: () => (<Ionicons name="add-circle-outline" size={24} color="#f4952f" />)
+                }}
+            />
             <Tab.Screen name="Sort" component={Empty}
                 listeners={() => ({
                     tabPress: (e) => {

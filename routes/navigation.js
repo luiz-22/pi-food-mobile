@@ -5,6 +5,9 @@ import { getRecipes, getDiets, getDishes } from "../redux/actions";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { EvilIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+
 import Detail from '../screens/detail'
 import Tabs from './tabs';
 
@@ -23,7 +26,12 @@ const Navigation = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
+                <Stack.Screen name="Tabs" component={Tabs}
+                    options={{
+                        headerShown: false
+                    }}
+
+                />
                 <Stack.Screen name="Detail" component={Detail}
                     options={{
                         title: "Recipe Inn",
