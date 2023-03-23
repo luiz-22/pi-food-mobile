@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from "react-redux";
 import { getAllRecipes, modalSort, modalFilter, modalAbout } from "../redux/actions";
 
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -43,7 +43,13 @@ const Tabs = () => {
                         color: "#f4952f",
                         fontFamily: "Kalam-Regular",
                     },
-                    headerRight: () => (<Ionicons name="add-circle-outline" size={24} color="#f4952f" />)
+                    headerRight: () => (
+                        <View style={styles.optionsBar}>
+                            <View style={{ marginRight: 10 }}>
+                                <EvilIcons name="search" size={32} color="#f4952f" />
+                            </View>
+                        </View>
+                    ),
                 }}
             />
             <Tab.Screen name="Sort" component={Empty}
@@ -72,6 +78,13 @@ const Tabs = () => {
                     )
                 }}
             />
+            <Tab.Screen name="New Recipe" component={Empty}
+                options={{
+                    tabBarIcon: () => (
+                        <Ionicons name="add-circle-outline" size={28} color="#f4952f" />
+                    )
+                }}
+            />
             <Tab.Screen name="Show All" component={Empty}
                 listeners={() => ({
                     tabPress: (e) => {
@@ -95,5 +108,11 @@ const Tabs = () => {
         </Tab.Navigator>
     )
 }
+
+const styles = StyleSheet.create({
+    optionsBar: {
+        flexDirection: "row",
+    }
+});
 
 export default Tabs
