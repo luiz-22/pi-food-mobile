@@ -8,15 +8,12 @@ import Card from './card'
 import Sort from '../modals/sort';
 import Filter from '../modals/filter';
 
-
 const Home = () => {
 
   const recipes = useSelector((state) => state.recipes);
   const modalSort = useSelector((state) => state.modalSort);
   const modalFilter = useSelector((state) => state.modalFilter)
-  const modalAbout = useSelector((state) => state.modalAbout)
   
-
   console.log(recipes.length);
 
   const renderItem = ({ item }) => {

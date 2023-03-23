@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from "react-redux";
-import { getAllRecipes, modalSort, modalFilter, modalAbout } from "../redux/actions";
+import { getAllRecipes, modalSort, modalFilter, modalAbout} from "../redux/actions";
 
 import { View, StyleSheet } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -19,7 +19,7 @@ function Empty() {
     return (<View style={{ flex: 1, backgroundColor: "red" }} />)
 }
 
-const Tabs = () => {
+const Tabs = ({ navigation }) => {
 
     const dispatch = useDispatch();
 
@@ -79,11 +79,18 @@ const Tabs = () => {
                 }}
             />
             <Tab.Screen name="New Recipe" component={Empty}
+                listeners={() => ({
+                    tabPress: (e) => {
+                        e.preventDefault()
+                        navigation.navigate('Form')
+                    },
+                })}
                 options={{
                     tabBarIcon: () => (
                         <Ionicons name="add-circle-outline" size={28} color="#f4952f" />
                     )
                 }}
+
             />
             <Tab.Screen name="Show All" component={Empty}
                 listeners={() => ({

@@ -21,7 +21,6 @@ const initialState = {
     detail: {},
     modalSort: false,
     modalFilter: false,
-    modalAbout: false
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -133,11 +132,6 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 modalFilter: action.payload
-            }
-        case 'MODAL_ABOUT':
-            return {
-                ...state,
-                modalAbout: action.payload
             }
         default:
             return { ...state }

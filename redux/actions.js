@@ -134,7 +134,3 @@ export function modalSort(open) {
 export function modalFilter(open) {
     return { type: 'MODAL_FILTER', payload: open }
 }
-
-export function modalAbout(open) {
-    return { type: 'MODAL_ABOUT', payload: open }
-}

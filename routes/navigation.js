@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import Detail from '../screens/detail'
 import Tabs from './tabs';
+import Form from '../screens/form';
 
 const Stack = createStackNavigator();
 
@@ -44,6 +45,19 @@ const Navigation = () => {
                         },
                         headerTintColor: "#f4952f",
                     }} />
+                <Stack.Screen name="Form" component={Form}
+                    options={{
+                        title: "Recipe Inn",
+                        headerStyle: {
+                            backgroundColor: "#000000",
+                        },
+                        headerTitleStyle: {
+                            color: "#f4952f",
+                            fontFamily: "Kalam-Regular",
+                        },
+                        headerTintColor: "#f4952f",
+                    }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     )
