@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { View, Text, StyleSheet } from 'react-native'
 import { FlatList } from 'react-native'
