@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, ScrollView } from 'react-native'
 import CheckBox from 'react-native-check-box'
@@ -11,7 +11,28 @@ const Form = () => {
     const diets = useSelector((state) => state.diets);
     const dishes = useSelector((state) => state.dishes);
     const dispatch = useDispatch();
-    const [check, setCheck] = useState(false);
+
+    const [check, setCheck] = useState([]);
+    const [check2, setCheck2] = useState([]);
+
+    useEffect(() => {
+        setCheck(
+            diets.map((d) => {
+                let checked = false;
+                return { ...d, checked }
+            })
+        )
+
+        setCheck2(
+            dishes.map((d) => {
+                let checked = false;
+                return { ...d, checked }
+            })
+        )
+
+    }, []);
+
+    console.log(check2)
 
     return (
         <ScrollView>
@@ -64,14 +85,33 @@ const Form = () => {
                             />
                             <Text>Diets</Text>
                             <View style={styles.checkList}>
-                                {diets.map((diet, index) => {
+                                {diets?.map((diet, index) => {
                                     return (
                                         <View style={styles.item} key={index}>
                                             <CheckBox
                                                 onClick={() => {
-                                                    setCheck(!check)
+                                                    const oldData = props.values.diets
+
+                                                    if (check[diet.id - 1]?.checked === true) {
+                                                        const newData = oldData?.filter(i => i !== diet.name)
+                                                        props.setFieldValue('diets', newData)
+                                                    }
+                                                    else {
+                                                        const newData = oldData?.concat(diet.name);
+                                                        props.setFieldValue('diets', newData);
+                                                    }
+
+                                                    setCheck(
+                                                        check?.map((d) => {
+                                                            if (diet.id === d.id) {
+                                                                return { ...d, checked: !d.checked }
+                                                            } else {
+                                                                return d
+                                                            }
+                                                        })
+                                                    )
                                                 }}
-                                                isChecked={check}
+                                                isChecked={check[diet.id - 1]?.checked}
                                             />
                                             <Text>{diet.name}</Text>
                                         </View>
@@ -80,14 +120,32 @@ const Form = () => {
                             </View>
                             <Text>Types of dishes</Text>
                             <View style={styles.checkList}>
-                                {dishes.map((dish, index) => {
+                                {dishes?.map((dish, index) => {
                                     return (
                                         <View style={styles.item} key={index}>
                                             <CheckBox
                                                 onClick={() => {
-                                                    setCheck(!check)
+                                                    const oldData = props.values.dishTypes
+
+                                                    if (check2[dish.id - 1]?.checked === true) {
+                                                        const newData = oldData?.filter(i => i !== dish.name)
+                                                        props.setFieldValue('dishTypes', newData)                                
+                                                    } else {
+                                                        const newData = oldData?.concat(dish.name);
+                                                        props.setFieldValue('dishTypes', newData);
+                                                    }
+
+                                                    setCheck2(
+                                                        check2?.map((d) => {
+                                                            if (dish.id === d.id) {
+                                                                return { ...d, checked: !d.checked }
+                                                            } else {
+                                                                return d
+                                                            }
+                                                        })
+                                                    )
                                                 }}
-                                                isChecked={check}
+                                                isChecked={check2[dish.id - 1]?.checked}
                                             />
                                             <Text>{dish.name}</Text>
                                         </View>
