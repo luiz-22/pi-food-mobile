@@ -1,13 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
+import { createRecipe } from "../redux/actions";
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, ScrollView } from 'react-native'
 import CheckBox from 'react-native-check-box'
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
+const reviewSchema = yup.object({
+    title: yup.string()
+        .required()
+        .min(4),
+    summary: yup.string()
+        .required()
+        .min(8),
+    healthScore: yup.string()
+        .test('is-num-0-100', '0 - 100', (val) => {
+            return parseInt(val) <= 100 && parseInt(val) >= 0;
+        }),
+    readyInMinutes: yup.string()
+        .test('is-num-0-240', '0 - 240', (val) => {
+            return parseInt(val) <= 240 && parseInt(val) >= 0;
+        }),
+});
 
-
-const Form = () => {
+const Form = ({navigation}) => {
     const diets = useSelector((state) => state.diets);
     const dishes = useSelector((state) => state.dishes);
     const dispatch = useDispatch();
@@ -32,29 +48,34 @@ const Form = () => {
 
     }, []);
 
-    console.log(check2)
-
     return (
         <ScrollView>
             <View style={styles.container}>
                 <Formik
                     initialValues={{ title: '', summary: '', steps: '', image: '', healthScore: 0, readyInMinutes: 0, dishTypes: [], diets: [] }}
+                    validationSchema={reviewSchema}
                     onSubmit={(values, actions) => {
-                        console.log(values)
+                        dispatch(createRecipe(values))
+                        actions.resetForm();
+                        navigation.navigate("Tabs");
                     }}
                 >
                     {props => (
                         <View>
                             <Text>Title*</Text>
+                            {(props.touched.title && props.errors.title) && <Text>{props.touched.title && props.errors.title}</Text>}
                             <TextInput
                                 style={styles.input}
                                 onChangeText={props.handleChange('title')}
+                                onBlur={props.handleBlur('title')}
                                 value={props.values.title}
                             />
                             <Text>Summary*</Text>
+                            {(props.touched.summary && props.errors.summary) && <Text>{props.touched.summary && props.errors.summary}</Text>}
                             <TextInput
                                 style={styles.input}
                                 onChangeText={props.handleChange('summary')}
+                                onBlur={props.handleBlur('summary')}
                                 value={props.values.summary}
                             />
                             <Text>Steps</Text>
@@ -70,17 +91,21 @@ const Form = () => {
                                 value={props.values.image}
                             />
                             <Text>Health Score (0 - 100)</Text>
+                            {(props.touched.healthScore && props.errors.healthScore) && <Text>{props.touched.healthScore && props.errors.healthScore}</Text>}
                             <TextInput
                                 style={[styles.input, styles.numeric]}
                                 keyboardType='numeric'
-                                onChangeText={props.handleChange('score')}
+                                onChangeText={props.handleChange('healthScore')}
+                                onBlur={props.handleBlur('healthScore')}
                                 value={props.values.score}
                             />
                             <Text>Ready in (minutes)</Text>
+                            {(props.touched.readyInMinutes && props.errors.readyInMinutes) && <Text>{props.touched.readyInMinutes && props.errors.readyInMinutes}</Text>}
                             <TextInput
                                 style={[styles.input, styles.numeric]}
                                 keyboardType='numeric'
-                                onChangeText={props.handleChange('minutes')}
+                                onChangeText={props.handleChange('readyInMinutes')}
+                                onBlur={props.handleBlur('readyInMinutes')}
                                 value={props.values.minutes}
                             />
                             <Text>Diets</Text>
@@ -129,7 +154,7 @@ const Form = () => {
 
                                                     if (check2[dish.id - 1]?.checked === true) {
                                                         const newData = oldData?.filter(i => i !== dish.name)
-                                                        props.setFieldValue('dishTypes', newData)                                
+                                                        props.setFieldValue('dishTypes', newData)
                                                     } else {
                                                         const newData = oldData?.concat(dish.name);
                                                         props.setFieldValue('dishTypes', newData);
