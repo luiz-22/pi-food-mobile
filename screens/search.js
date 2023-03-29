@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from "react-redux";
+import { search } from "../redux/actions";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 
-export default function Search() {
+export default function Search({ navigation }) {
+    const [searchRecipe, setSearchRecipe] = useState('');
 
-    const [search, setSearch] = useState('');
+    const dispatch = useDispatch();
 
     const handleSubmit = () => {
+        navigation.navigate("Tabs");
+        dispatch(search(searchRecipe))
     };
 
-    const handleChange = (search) => setSearch(search);
+    const handleChange = (value) => setSearchRecipe(value);
 
     return (
         <View>
@@ -17,7 +22,7 @@ export default function Search() {
                 placeholder="Write a Title"
                 placeholderTextColor="#576574"
                 value={search}
-                onChangeText={(search) => handleChange(search)}
+                onChangeText={(searchRecipe) => handleChange(searchRecipe)}
             />
             <TouchableOpacity style={styles.buttonSave} onPress={handleSubmit}>
                 <Text style={styles.buttonText}>Search</Text>
