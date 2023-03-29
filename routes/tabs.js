@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch } from "react-redux";
-import { getAllRecipes, modalSort, modalFilter, modalAbout} from "../redux/actions";
+import { getAllRecipes, modalSort, modalFilter, modalAbout } from "../redux/actions";
 
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -45,9 +45,9 @@ const Tabs = ({ navigation }) => {
                     },
                     headerRight: () => (
                         <View style={styles.optionsBar}>
-                            <View style={{ marginRight: 10 }}>
+                            <TouchableOpacity style={{ marginRight: 10 }} onPress={() => navigation.navigate("Search")}>
                                 <EvilIcons name="search" size={32} color="#f4952f" />
-                            </View>
+                            </TouchableOpacity>
                         </View>
                     ),
                 }}

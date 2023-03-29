@@ -5,12 +5,10 @@ import { getRecipes, getDiets, getDishes } from "../redux/actions";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { EvilIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-
-import Detail from '../screens/detail'
 import Tabs from './tabs';
+import Detail from '../screens/detail'
 import Form from '../screens/form';
+import Search from '../screens/search';
 
 const Stack = createStackNavigator();
 
@@ -44,8 +42,22 @@ const Navigation = () => {
                             fontFamily: "Kalam-Regular",
                         },
                         headerTintColor: "#f4952f",
-                    }} />
+                    }}
+                />
                 <Stack.Screen name="Form" component={Form}
+                    options={{
+                        title: "Recipe Inn",
+                        headerStyle: {
+                            backgroundColor: "#000000",
+                        },
+                        headerTitleStyle: {
+                            color: "#f4952f",
+                            fontFamily: "Kalam-Regular",
+                        },
+                        headerTintColor: "#f4952f",
+                    }}
+                />
+                <Stack.Screen name="Search" component={Search}
                     options={{
                         title: "Recipe Inn",
                         headerStyle: {
