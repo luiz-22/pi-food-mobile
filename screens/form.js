@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#f4952f',
         textTransform: 'uppercase',
-        fontSize: 16,
+        fontSize: 14,
         textAlign: 'center',
     },
     checkList: {
