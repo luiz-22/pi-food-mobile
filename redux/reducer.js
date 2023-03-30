@@ -18,9 +18,7 @@ const initialState = {
     recipes: [],
     diets: [],
     dishes: [],
-    detail: {},
-    modalSort: false,
-    modalFilter: false,
+    detail: {}
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -122,16 +120,6 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 detail: action.payload
-            }
-        case 'MODAL_SORT':
-            return {
-                ...state,
-                modalSort: action.payload
-            }
-        case 'MODAL_FILTER':
-            return {
-                ...state,
-                modalFilter: action.payload
             }
         default:
             return { ...state }

@@ -126,11 +126,3 @@ export function createRecipe(recipe) {
         }
     }
 }
-
-export function modalSort(open) {
-    return { type: 'MODAL_SORT', payload: open }
-}
-
-export function modalFilter(open) {
-    return { type: 'MODAL_FILTER', payload: open }
-}

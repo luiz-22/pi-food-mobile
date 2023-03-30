@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from "react-redux";
 import { getAllRecipes, modalSort, modalFilter, modalAbout } from "../redux/actions";
 
@@ -20,7 +20,6 @@ function Empty() {
 }
 
 const Tabs = ({ navigation }) => {
-
     const dispatch = useDispatch();
 
     return (
@@ -56,7 +55,7 @@ const Tabs = ({ navigation }) => {
                 listeners={() => ({
                     tabPress: (e) => {
                         e.preventDefault()
-                        dispatch(modalSort(true))
+                        navigation.navigate('Sort')
                     },
                 })}
                 options={{
@@ -69,7 +68,7 @@ const Tabs = ({ navigation }) => {
                 listeners={() => ({
                     tabPress: (e) => {
                         e.preventDefault()
-                        dispatch(modalFilter(true))
+                        navigation.navigate('Filter')
                     },
                 })}
                 options={{
@@ -88,7 +87,7 @@ const Tabs = ({ navigation }) => {
                 options={{
                     tabBarIcon: () => (
                         <Ionicons name="add-circle-outline" size={28} color="#f4952f" />
-                    )
+                    ),
                 }}
 
             />

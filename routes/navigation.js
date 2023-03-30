@@ -9,6 +9,8 @@ import Tabs from './tabs';
 import Detail from '../screens/detail'
 import Form from '../screens/form';
 import Search from '../screens/search';
+import Sort from '../screens/sort';
+import Filter from '../screens/filter';
 
 const Stack = createStackNavigator();
 
@@ -29,7 +31,6 @@ const Navigation = () => {
                     options={{
                         headerShown: false
                     }}
-
                 />
                 <Stack.Screen name="Detail" component={Detail}
                     options={{
@@ -58,6 +59,32 @@ const Navigation = () => {
                     }}
                 />
                 <Stack.Screen name="Search" component={Search}
+                    options={{
+                        title: "Recipe Inn",
+                        headerStyle: {
+                            backgroundColor: "#000000",
+                        },
+                        headerTitleStyle: {
+                            color: "#f4952f",
+                            fontFamily: "Kalam-Regular",
+                        },
+                        headerTintColor: "#f4952f",
+                    }}
+                />
+                <Stack.Screen name="Sort" component={Sort}
+                    options={{
+                        title: "Recipe Inn",
+                        headerStyle: {
+                            backgroundColor: "#000000",
+                        },
+                        headerTitleStyle: {
+                            color: "#f4952f",
+                            fontFamily: "Kalam-Regular",
+                        },
+                        headerTintColor: "#f4952f",
+                    }}
+                />
+                <Stack.Screen name="Filter" component={Filter}
                     options={{
                         title: "Recipe Inn",
                         headerStyle: {
