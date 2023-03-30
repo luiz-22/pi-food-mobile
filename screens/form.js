@@ -23,7 +23,7 @@ const reviewSchema = yup.object({
         }),
 });
 
-const Form = ({navigation}) => {
+const Form = ({ navigation }) => {
     const diets = useSelector((state) => state.diets);
     const dishes = useSelector((state) => state.dishes);
     const dispatch = useDispatch();
@@ -63,7 +63,7 @@ const Form = ({navigation}) => {
                     {props => (
                         <View>
                             <Text>Title*</Text>
-                            {(props.touched.title && props.errors.title) && <Text>{props.touched.title && props.errors.title}</Text>}
+                            {(props.touched.title && props.errors.title) && <Text style={styles.errorText}>{props.touched.title && props.errors.title}</Text>}
                             <TextInput
                                 style={styles.input}
                                 onChangeText={props.handleChange('title')}
@@ -71,7 +71,7 @@ const Form = ({navigation}) => {
                                 value={props.values.title}
                             />
                             <Text>Summary*</Text>
-                            {(props.touched.summary && props.errors.summary) && <Text>{props.touched.summary && props.errors.summary}</Text>}
+                            {(props.touched.summary && props.errors.summary) && <Text style={styles.errorText}>{props.touched.summary && props.errors.summary}</Text>}
                             <TextInput
                                 style={styles.input}
                                 onChangeText={props.handleChange('summary')}
@@ -91,7 +91,7 @@ const Form = ({navigation}) => {
                                 value={props.values.image}
                             />
                             <Text>Health Score (0 - 100)</Text>
-                            {(props.touched.healthScore && props.errors.healthScore) && <Text>{props.touched.healthScore && props.errors.healthScore}</Text>}
+                            {(props.touched.healthScore && props.errors.healthScore) && <Text style={styles.errorText}>{props.touched.healthScore && props.errors.healthScore}</Text>}
                             <TextInput
                                 style={[styles.input, styles.numeric]}
                                 keyboardType='numeric'
@@ -100,7 +100,7 @@ const Form = ({navigation}) => {
                                 value={props.values.score}
                             />
                             <Text>Ready in (minutes)</Text>
-                            {(props.touched.readyInMinutes && props.errors.readyInMinutes) && <Text>{props.touched.readyInMinutes && props.errors.readyInMinutes}</Text>}
+                            {(props.touched.readyInMinutes && props.errors.readyInMinutes) && <Text style={styles.errorText}>{props.touched.readyInMinutes && props.errors.readyInMinutes}</Text>}
                             <TextInput
                                 style={[styles.input, styles.numeric]}
                                 keyboardType='numeric'
@@ -108,74 +108,82 @@ const Form = ({navigation}) => {
                                 onBlur={props.handleBlur('readyInMinutes')}
                                 value={props.values.minutes}
                             />
-                            <Text>Diets</Text>
-                            <View style={styles.checkList}>
-                                {diets?.map((diet, index) => {
-                                    return (
-                                        <View style={styles.item} key={index}>
-                                            <CheckBox
-                                                onClick={() => {
-                                                    const oldData = props.values.diets
+                            <View style={styles.checkContainer}>
+                                <View>
+                                    <Text>Diets</Text>
+                                    <View style={styles.checkList}>
+                                        {diets?.map((diet, index) => {
+                                            return (
+                                                <View style={styles.item} key={index}>
+                                                    <CheckBox
+                                                        onClick={() => {
+                                                            const oldData = props.values.diets
 
-                                                    if (check[diet.id - 1]?.checked === true) {
-                                                        const newData = oldData?.filter(i => i !== diet.name)
-                                                        props.setFieldValue('diets', newData)
-                                                    }
-                                                    else {
-                                                        const newData = oldData?.concat(diet.name);
-                                                        props.setFieldValue('diets', newData);
-                                                    }
-
-                                                    setCheck(
-                                                        check?.map((d) => {
-                                                            if (diet.id === d.id) {
-                                                                return { ...d, checked: !d.checked }
-                                                            } else {
-                                                                return d
+                                                            if (check[diet.id - 1]?.checked === true) {
+                                                                const newData = oldData?.filter(i => i !== diet.name)
+                                                                props.setFieldValue('diets', newData)
                                                             }
-                                                        })
-                                                    )
-                                                }}
-                                                isChecked={check[diet.id - 1]?.checked}
-                                            />
-                                            <Text>{diet.name}</Text>
-                                        </View>
-                                    )
-                                })}
-                            </View>
-                            <Text>Types of dishes</Text>
-                            <View style={styles.checkList}>
-                                {dishes?.map((dish, index) => {
-                                    return (
-                                        <View style={styles.item} key={index}>
-                                            <CheckBox
-                                                onClick={() => {
-                                                    const oldData = props.values.dishTypes
-
-                                                    if (check2[dish.id - 1]?.checked === true) {
-                                                        const newData = oldData?.filter(i => i !== dish.name)
-                                                        props.setFieldValue('dishTypes', newData)
-                                                    } else {
-                                                        const newData = oldData?.concat(dish.name);
-                                                        props.setFieldValue('dishTypes', newData);
-                                                    }
-
-                                                    setCheck2(
-                                                        check2?.map((d) => {
-                                                            if (dish.id === d.id) {
-                                                                return { ...d, checked: !d.checked }
-                                                            } else {
-                                                                return d
+                                                            else {
+                                                                const newData = oldData?.concat(diet.name);
+                                                                props.setFieldValue('diets', newData);
                                                             }
-                                                        })
-                                                    )
-                                                }}
-                                                isChecked={check2[dish.id - 1]?.checked}
-                                            />
-                                            <Text>{dish.name}</Text>
-                                        </View>
-                                    )
-                                })}
+
+                                                            setCheck(
+                                                                check?.map((d) => {
+                                                                    if (diet.id === d.id) {
+                                                                        return { ...d, checked: !d.checked }
+                                                                    } else {
+                                                                        return d
+                                                                    }
+                                                                })
+                                                            )
+                                                        }}
+                                                        isChecked={check[diet.id - 1]?.checked}
+                                                        checkedCheckBoxColor={"#f4952f"}
+                                                    />
+                                                    <Text>{diet.name}</Text>
+                                                </View>
+                                            )
+                                        })}
+                                    </View>
+                                </View>
+                                <View>
+                                    <Text>Types of dishes</Text>
+                                    <View style={styles.checkList}>
+                                        {dishes?.map((dish, index) => {
+                                            return (
+                                                <View style={styles.item} key={index}>
+                                                    <CheckBox
+                                                        onClick={() => {
+                                                            const oldData = props.values.dishTypes
+
+                                                            if (check2[dish.id - 1]?.checked === true) {
+                                                                const newData = oldData?.filter(i => i !== dish.name)
+                                                                props.setFieldValue('dishTypes', newData)
+                                                            } else {
+                                                                const newData = oldData?.concat(dish.name);
+                                                                props.setFieldValue('dishTypes', newData);
+                                                            }
+
+                                                            setCheck2(
+                                                                check2?.map((d) => {
+                                                                    if (dish.id === d.id) {
+                                                                        return { ...d, checked: !d.checked }
+                                                                    } else {
+                                                                        return d
+                                                                    }
+                                                                })
+                                                            )
+                                                        }}
+                                                        isChecked={check2[dish.id - 1]?.checked}
+                                                        checkedCheckBoxColor={"#f4952f"}
+                                                    />
+                                                    <Text>{dish.name}</Text>
+                                                </View>
+                                            )
+                                        })}
+                                    </View>
+                                </View>
                             </View>
                             <TouchableOpacity onPress={props.handleSubmit}>
                                 <View style={styles.button}>
@@ -208,14 +216,12 @@ const styles = StyleSheet.create({
         width: 80,
     },
     button: {
-        borderRadius: 8,
         paddingVertical: 14,
         paddingHorizontal: 10,
-        backgroundColor: '#f01d71',
+        backgroundColor: '#000',
     },
     buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
+        color: '#f4952f',
         textTransform: 'uppercase',
         fontSize: 16,
         textAlign: 'center',
@@ -226,7 +232,14 @@ const styles = StyleSheet.create({
     item: {
         flexDirection: 'row',
         marginRight: 10
-    }
+    },
+    checkContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    errorText: {
+        color: '#f4952f',
+    },
 });
 
 export default Form
