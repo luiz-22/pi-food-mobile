@@ -22,7 +22,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.luiz-22.pifoodmobile"
+      "package": "com.luiz22.pifoodmobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"
