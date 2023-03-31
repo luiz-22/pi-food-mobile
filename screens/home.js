@@ -5,11 +5,11 @@ import { View, Text, StyleSheet } from 'react-native'
 import { FlatList } from 'react-native'
 
 import Card from './card'
+import Loader from './loader';
 
 const Home = () => {
 
   const recipes = useSelector((state) => state.recipes);
-  const modalFilter = useSelector((state) => state.modalFilter)
 
   console.log(recipes.length);
 
@@ -20,6 +20,8 @@ const Home = () => {
   return (
     <View style={styles.container}>
 
+      {recipes.length === 0 && <Loader/>}
+     
       <FlatList
         data={recipes} // Recive un array
         keyExtractor={(item) => item.id.toString()}

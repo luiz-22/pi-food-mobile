@@ -9,8 +9,8 @@ export default function Search({ navigation }) {
     const dispatch = useDispatch();
 
     const handleSubmit = () => {
-        navigation.navigate("Tabs");
         dispatch(search(searchRecipe))
+        navigation.navigate("Tabs");
     };
 
     const handleChange = (value) => setSearchRecipe(value);
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#f4952f",
         height: 30,
-        color: "#000",
+        color: "#fff",
         textAlign: "center",
         padding: 4,
     },
