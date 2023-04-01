@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useCallback } from 'react';
-import { View, Text } from 'react-native'
+import { View, Text, StatusBar } from 'react-native'
 
 import { useFonts } from "expo-font";
 import * as SplashScreen from 'expo-splash-screen';
@@ -32,7 +32,8 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <Navigation onLayout={onLayoutRootView} />
+        <StatusBar backgroundColor="#000" />
+        <Navigation onLayout={onLayoutRootView} />
     </Provider>
     // <View>
     //   <Text>Hola Mundo!!!</Text>
