@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler';
+import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 import React, { useCallback } from 'react';
 import { View, Text, StatusBar } from 'react-native'
 
@@ -31,9 +32,9 @@ export default function App() {
   }
 
   return (
-    <Provider store={store}>
-        <StatusBar backgroundColor="#000" />
-        <Navigation onLayout={onLayoutRootView} />
+    <Provider store={store} PropTypes={ViewPropTypes}>
+      <StatusBar backgroundColor="#000" />
+      <Navigation onLayout={onLayoutRootView} />
     </Provider>
     // <View>
     //   <Text>Hola Mundo!!!</Text>
