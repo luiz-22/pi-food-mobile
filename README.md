@@ -19,4 +19,6 @@ Aplicación móvil de recetas creada con React Native. Permite buscar, crear, fi
 ## Tecnologías usadas
 
 - React Native
+- Expo
+- React Navigation
 - Redux
